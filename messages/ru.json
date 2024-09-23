@@ -1,0 +1,16 @@
+{
+  "Index": {
+    "title": "Hello world!"
+  },
+  "Navigation": {
+    "home": "Главная",
+    "about": "Обо мне",
+    "services": "Услуги",
+    "testimonials": "Отзывы",
+    "blog": "Блог",
+    "contacts": "Контакты"
+  },
+  "Home": {
+
+  }
+}
