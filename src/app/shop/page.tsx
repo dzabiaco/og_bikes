@@ -1,11 +1,32 @@
+"use client";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/HomePage/Footer";
 import ProductItem from "@/app/shop/ProductItem";
 import {mdiInstagram, mdiMagnify} from "@mdi/js";
 import Icon from "@mdi/react";
+import {useEffect, useState} from "react";
 
 
 export default function Page (){
+    const [products, setProducts] = useState([]);
+
+    useEffect( ()=> {
+        const fetchProducts = async () => {
+            try {
+                const products = await fetch(`/api/product`);
+                const data = await products.json();
+                setProducts(data.products);
+            }
+            catch (error){
+                console.error("Error fetching products:", error);
+            }
+        }
+        fetchProducts().then(r => {
+        });
+
+        console.log(products);
+    }, [products]);
+
     return (
         <>
             <div className="page">
@@ -44,28 +65,9 @@ export default function Page (){
                             </form>
                         </div>
                         <div className="row row-xl row-30 row-md-50 row-xl-70">
-                            <ProductItem/>
-                            <ProductItem/>
-                            <ProductItem/>
-                            <ProductItem/>
-                            <ProductItem/>
-                            <ProductItem/>
-                        </div>
-                        <div className="pagination-wrap">
-                            <nav aria-label="Page navigation">
-                                <ul className="pagination">
-                                    <li className="page-item page-item-control disabled">
-                                        <a className="page-link"
-                                                                                            aria-label="Previous"><span
-                                        className="icon" aria-hidden="true"></span></a></li>
-                                    <li className="page-item active"><span className="page-link">1</span></li>
-                                    <li className="page-item"><a className="page-link" href="#">2</a></li>
-                                    <li className="page-item"><a className="page-link" href="#">3</a></li>
-                                    <li className="page-item page-item-control"><a className="page-link"
-                                                                                   aria-label="Next"><span
-                                        className="icon" aria-hidden="true"></span></a></li>
-                                </ul>
-                            </nav>
+                            {products.map((product) => (
+                                <ProductItem key={product._id} product={product} />
+                            ))}
                         </div>
                     </div>
                 </section>
