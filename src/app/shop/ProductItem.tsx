@@ -22,7 +22,7 @@ export default function ProductItem({product}){
                             <span className="icon mdi mdi-star-outline"></span>
                         </div>
                         <p className="product-text">{product.content.slice(0,78)}</p>
-                        <Link className="button button-gray-800" href="cart-page.html">
+                        <Link className="button button-gray-800" href={`/shop/${product._id}`}>
                             Show Product
                         </Link>
                     </div>
